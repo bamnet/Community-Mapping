@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  is_public: false
+  center_latitude: 9.99
+  center_longitude: 9.99
+  default_zoom: 1
+
+two:
+  name: MyString
+  is_public: false
+  center_latitude: 9.99
+  center_longitude: 9.99
+  default_zoom: 1

@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @project.name %>
+</p>
+
+<p>
+  <b>Is public:</b>
+  <%= @project.is_public %>
+</p>
+
+<p>
+  <b>Center latitude:</b>
+  <%= @project.center_latitude %>
+</p>
+
+<p>
+  <b>Center longitude:</b>
+  <%= @project.center_longitude %>
+</p>
+
+<p>
+  <b>Default zoom:</b>
+  <%= @project.default_zoom %>
+</p>
+
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
