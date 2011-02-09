@@ -1,12 +1,29 @@
+<% content_for(:js) do %>
+var map; //The map!
+<% end %>
+<% content_for(:js_ready) do %>
+  var center = {"point":{"latitude":"<%= @project.center_latitude %>","longitude":"<%=@project.center_longitude%>"}};
+  map = setup_map(center, <%= @project.default_zoom %>);
+  google.maps.event.addListener(map, 'center_changed', function(){
+    var new_center = map.getCenter();
+    $('#project_center_latitude').val(new_center.lat());
+    $('#project_center_longitude').val(new_center.lng());
+  });
+  google.maps.event.addListener(map, 'zoom_changed', function(){
+    $('#project_default_zoom').val(map.getZoom());
+  });
+<% end %>
+
 <%= semantic_form_for(@project) do |f| %>
   <%= f.inputs do %>
     <%= f.input :name, :label => "Project Name" %>
     <%= f.input :is_public, :label => "Public Map", :hint => "Allow non-collaborators to see this map" %>
   <% end %>
-  <%= f.inputs :id =>"hidden" do %>
-    <%= f.input :center_latitude %>
-    <%= f.input :center_longitude %>
-    <%= f.input :default_zoom %>
+  <%= f.inputs :id =>"map", :name => "Set default view - drag and zoom the map" do %>
+    <%= map_canvas(:style => "width: 100%; height:500px;") %>
+    <%= f.input :center_latitude, :as => :hidden %>
+    <%= f.input :center_longitude, :as => :hidden %>
+    <%= f.input :default_zoom, :as => :hidden %>
   <% end %>
   <% f.buttons do %>
     <%= f.commit_button %>

@@ -1,30 +1,14 @@
-<p id="notice"><%= notice %></p>
+<% content_for(:js) do %>
+var map; //The map!
+<% end %>
+<% content_for(:js_ready) do %>
+  var midpoint = {"point":{"latitude":"<%= @project.center_latitude %>","longitude":"<%= @project.center_longitude %>"}};
+  map = setup_map(midpoint, <%= @project.default_zoom %>);
+<% end %>
 
-<p>
-  <b>Name:</b>
+<div class="main-title">
   <%= @project.name %>
-</p>
-
-<p>
-  <b>Is public:</b>
-  <%= @project.is_public %>
-</p>
-
-<p>
-  <b>Center latitude:</b>
-  <%= @project.center_latitude %>
-</p>
-
-<p>
-  <b>Center longitude:</b>
-  <%= @project.center_longitude %>
-</p>
-
-<p>
-  <b>Default zoom:</b>
-  <%= @project.default_zoom %>
-</p>
-
-
+  <%= map_canvas(:style => "width: 100%; height:500px;") %>
+</div>
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

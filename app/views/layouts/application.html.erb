@@ -45,7 +45,7 @@
       <div id="topbar">
         <div id="topbar-padding">
           <div id="topbar-left">
-            <h1>Community Mapping</h1>
+            <h1><%= !@project.nil? ? @project.name : "Community Mapping" %></h1>
           </div>
           <div id="topbar-right">
             Login
