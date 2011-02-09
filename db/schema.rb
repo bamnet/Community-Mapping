@@ -10,14 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110123210553) do
+ActiveRecord::Schema.define(:version => 20110209022238) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.boolean  "is_public"
-    t.decimal  "center_latitude"
-    t.decimal  "center_longitude"
-    t.integer  "default_zoom"
+    t.boolean  "is_public",        :default => true
+    t.decimal  "center_latitude",  :default => 0.0
+    t.decimal  "center_longitude", :default => 0.0
+    t.integer  "default_zoom",     :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
