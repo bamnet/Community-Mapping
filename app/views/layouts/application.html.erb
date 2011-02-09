@@ -1,15 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CommunityMapping</title>
-  <%= stylesheet_link_tag :all %>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+  <title><%= yield(:title) || controller.controller_name.titleize %> Community Mapping</title>
+  <%= yield(:meta_tags) %>
   <%= formtastic_stylesheet_link_tag %>
+  <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false" %>
   <%= csrf_meta_tag %>
+  <% if content_for?(:js_ready) %>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        <%= yield(:js_ready) %>
+      });
+    </script>
+  <% end %>
+  <% if content_for?(:js) %>
+    <script type="text/javascript">
+      <%= yield(:js) %>
+    </script>
+  <% end %>
 </head>
 <body>
-
-<%= yield %>
-
+  <%= render :partial => 'layouts/header' %>
+  <% if flash.any? %>
+    <div id="flash_block" class="<%= flash.keys.join(' ') %>">
+      <div id="flash_block-padding">
+        <% flash.each_pair do |key, value|%>
+          <p><%= value %></p>
+        <% end %>
+      </div>
+    </div>
+    <% content_for :js_ready do%>
+        setTimeout(function(){
+          $("#flash_block").fadeOut("slow", function () {
+            $("#flash_block").remove();
+          });
+        }, 7000);
+    <% end %>
+  <% end %>
+  <div id="wrap">
+    <div id="header">
+      <div id="topbar">
+        <div id="topbar-padding">
+          <div id="topbar-left">
+            <h1>Community Mapping</h1>
+          </div>
+          <div id="topbar-right">
+            Login
+          </div>
+          <div style="clear:both;"></div>
+        </div>
+      </div>
+      <%#= render :partial => 'layouts/cat_tree' %>
+    </div>
+    
+    <div id="wrap-padding">
+      <%= yield %>
+    </div>
+  </div>
+  <%= render :partial => 'layouts/footer' %>
 </body>
 </html>
