@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  has_many :layers
+
   validates :name, :presence => true, :uniqueness => true
   validates :center_longitude, :numericality => true, :inclusion => { :in => -180..180 }
   validates :center_latitude, :numericality => true, :inclusion => { :in => -90..90}
