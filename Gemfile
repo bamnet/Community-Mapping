@@ -11,3 +11,5 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem 'formtastic', '~> 1.1.0'
 gem 'jquery-rails'
+
+gem 'devise'

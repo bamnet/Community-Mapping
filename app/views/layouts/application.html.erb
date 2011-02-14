@@ -48,7 +48,12 @@
             <h1><%= !@project.nil? ? @project.name : "Community Mapping" %></h1>
           </div>
           <div id="topbar-right">
-            Login
+            <% if user_signed_in? %>
+              Welcome <%= link_to current_user.name, edit_user_registration_path %>.  <%= link_to "Sign out", destroy_user_session_path %>
+            <% else %>
+              <%= link_to "Sign up", new_user_registration_path %> / 
+              <%= link_to "Login", new_user_session_path %>
+            <% end %>
           </div>
           <div style="clear:both;"></div>
         </div>
