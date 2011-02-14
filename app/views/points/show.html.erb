@@ -1,0 +1,37 @@
+<% content_for(:js) do %>
+var map; //The map!
+<% end %>
+<% content_for(:js_ready) do %>
+  var point = {"latitude":"<%= @point.latitude %>","longitude":"<%=@point.longitude%>"};
+  map = setup_map({"point": point}, <%= @project.default_zoom + 1 %>);
+  marker = add_point_to_map(point, map, {draggable: true});
+<% end %>
+<h2 class="breadcrumb"> 
+	<%= link_to @project.name, project_path %>&nbsp;/&nbsp;
+	<%= link_to @point.layer.name, project_layer_path(@project, @point.layer) %>&nbsp;/&nbsp;
+</h2>
+<div class="main-title">
+  <%= @point.name %>
+  <%= map_canvas(:style => "width: 50%; height:200px; float:right;") %>
+</div>
+<div id="info_box">
+  <% if !@point.description.empty? %>
+    <p><%= @point.description %></p><br />
+  <% end %>
+  <% if !@point.address.empty? %>
+    <p>
+      <b>Address:</b>
+      <%= @point.address %>
+    </p>
+  <% end %>
+  <% if !@point.date.blank? %>
+    <p>
+      <b>Date:</b>
+      <%= @point.date %>
+    </p>
+  <% end %>
+</div>
+<div style="clear: both;">
+  <%= link_to 'Edit', edit_project_point_path(@project, @point) %> |
+  <%= link_to 'Back', project_path(@project) %>
+</div>

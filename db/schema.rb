@@ -10,13 +10,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110209205537) do
+ActiveRecord::Schema.define(:version => 20110213180527) do
 
   create_table "layers", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.string   "color"
     t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "points", :force => true do |t|
+    t.string   "name"
+    t.text     "address"
+    t.text     "description"
+    t.decimal  "latitude"
+    t.decimal  "longitude"
+    t.datetime "date"
+    t.integer  "layer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

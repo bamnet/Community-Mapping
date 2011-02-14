@@ -15,5 +15,9 @@ var map; //The map!
     <li><%= link_to layer.name, [@project, layer] %></li>
   <% end %>
 </ul>
+
+<%= link_to 'New Layer', new_project_layer_path(@project) %> |
+<%= link_to 'New Point', new_project_point_path(@project) %>
+<br />
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

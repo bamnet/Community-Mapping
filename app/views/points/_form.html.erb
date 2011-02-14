@@ -1,0 +1,52 @@
+<% content_for(:js) do %>
+var map; //The map!
+var geocoder = new google.maps.Geocoder();; //The geocoder machine
+function update_fields(latlng){
+  $('#point_latitude').val(latlng.lat());
+  $('#point_longitude').val(latlng.lng());
+}
+function locate_address(){
+  var address = $("#point_address").val();
+  
+  geocoder.geocode({'address': address, 'location': map.getCenter()}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      marker.setPosition(results[0].geometry.location);
+      update_fields(results[0].geometry.location);
+      map.setCenter(results[0].geometry.location);
+    } else {
+      alert("Unable to locate address: " + status);
+    }
+  });
+}
+<% end %>
+<% content_for(:js_ready) do %>
+  var point = {"latitude":"<%= @point.latitude %>","longitude":"<%=@point.longitude%>"};
+  map = setup_map({"point": point}, <%= @project.default_zoom %>);
+  marker = add_point_to_map(point, map, {draggable: true});
+  google.maps.event.addListener(marker, "drag", function(){
+    update_fields(marker.getPosition());
+  });
+  google.maps.event.addListener(marker, "dragend", function(){
+    map.setCenter(marker.getPosition());
+  });
+<% end %>
+
+<%= semantic_form_for([@project, @point]) do |f| %>
+  <%= f.inputs :id =>"map", :name => "Drag the marker or use auto-locate to find a marker" do %>
+    <%= map_canvas(:style => "width: 100%; height:300px;") %>
+    <%= f.input :latitude, :as => :hidden %>
+    <%= f.input :longitude, :as => :hidden %>
+  <% end %>
+  <%= f.inputs do %>
+    <%= f.input :name %>
+    <%= f.input :layer, :collection => @project.layers, :include_blank => false %>
+    <%= f.input :address, :input_html => {:rows => 4, :cols => 10} %>
+    <input type="button" value="Auto-Locate" onclick="locate_address()"><i> Attempt to locate the address on the map.  Drag the pin to manually select a location.</i>  
+    <br /><br />
+    <%= f.input :description, :input_html => {:rows => 5} %>
+    <%= f.input :date, :as => :string %>
+  <% end %>
+  <% f.buttons do %>
+    <%= f.commit_button %>
+  <% end %>
+<% end %>

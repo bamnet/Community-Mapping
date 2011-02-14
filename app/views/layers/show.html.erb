@@ -5,20 +5,22 @@ var map; //The map!
   var midpoint = {"point":{"latitude":"<%= @project.center_latitude %>","longitude":"<%= @project.center_longitude %>"}};
   map = setup_map(midpoint, <%= @project.default_zoom %>);
 <% end %>
-
+<h2 class="breadcrumb">
+  <%= link_to @project.name, project_path(@project) %>&nbsp;/&nbsp;
+</h2>
 <div class="main-title">
   <%= @layer.name %>
   <%= map_canvas(:style => "width: 100%; height:500px;") %>
 </div>
-<p>
-  <b>Description:</b>
-  <%= @layer.description %>
-</p>
+<% if @layer.description.empty? %>
+  <p><%= @layer.description %></p>
+<% end %>
 
-<p>
-  <b>Color:</b>
-  <%= @layer.color %>
-</p>
+<li>
+  <% @layer.points.each do |point| %>
+    <ul><%= link_to point.name, [@project, point] %></ul>
+  <% end %>
+</li>
 
 <%= link_to 'Edit', edit_project_layer_path(@project, @layer) %> |
-<%= link_to 'Back', project_path %>
+<%= link_to 'Back', project_path(@project) %>

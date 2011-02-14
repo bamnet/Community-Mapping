@@ -20,10 +20,6 @@ function setup_map(center_point, zoom_level, div){
 // Optional: options can be used to override
 // and of the properties of the marker.
 function add_point_to_map(point, map, options){
-  var infowindow = new google.maps.InfoWindow({
-    content: "<b>" + point.name + "</b><br />" + point.description
-  });
-   
   var opts = {
     position: new google.maps.LatLng(point.latitude, point.longitude), 
     map: map,
@@ -34,9 +30,15 @@ function add_point_to_map(point, map, options){
     
   var marker = new google.maps.Marker(opts);
   
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindow.open(map, marker);
-  });
+  if ('name' in point) {
+    var infowindow = new google.maps.InfoWindow({
+      content: "<b>" + point.name + "</b><br />" + point.description
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(map, marker);
+    });
+  }
   
   return marker;
 }

@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  address: MyText
+  description: MyText
+  latitude: 9.99
+  longitude: 9.99
+  date: 2011-02-13 13:05:27
+  layer: 
+
+two:
+  name: MyString
+  address: MyText
+  description: MyText
+  latitude: 9.99
+  longitude: 9.99
+  date: 2011-02-13 13:05:27
+  layer: 

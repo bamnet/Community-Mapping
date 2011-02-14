@@ -1,6 +1,7 @@
 CommunityMapping::Application.routes.draw do
   resources :projects do
     resources :layers, :except => :index
+    resources :points, :except => :index
   end
 
   # The priority is based upon order of creation:

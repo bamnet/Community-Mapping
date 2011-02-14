@@ -1,5 +1,8 @@
 class Layer < ActiveRecord::Base
   belongs_to :project
+  has_many :points
+
+  default_scope order(:name)
 
   validates :name, :presence => true, :uniqueness => true  
   validate :lock_project, :on => :update
