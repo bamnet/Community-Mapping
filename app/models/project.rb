@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
   has_many :layers
+  has_and_belongs_to_many :users
 
   validates :name, :presence => true, :uniqueness => true
   validates :center_longitude, :numericality => true, :inclusion => { :in => -180..180 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110214220840) do
+ActiveRecord::Schema.define(:version => 20110214235753) do
 
   create_table "layers", :force => true do |t|
     t.string   "name"
@@ -41,6 +41,11 @@ ActiveRecord::Schema.define(:version => 20110214220840) do
     t.integer  "default_zoom",     :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "projects_users", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "user_id"
   end
 
   create_table "users", :force => true do |t|
