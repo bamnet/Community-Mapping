@@ -147,3 +147,11 @@ form.formtastic fieldset.buttons {
   font-size: 12px;
   list-style: square;
 }
+
+ul.big_list {
+  list-style-type: none;
+}
+ul.big_list li {
+  font-size: 2em;
+  padding-bottom: 10px;
+}

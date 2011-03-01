@@ -16,8 +16,9 @@ var map; //The map!
   <% end %>
 </ul>
 
-<%= link_to 'New Layer', new_project_layer_path(@project) %> |
-<%= link_to 'New Point', new_project_point_path(@project) %>
+<%= link_to 'New Layer', new_project_layer_path(@project) if can? :create, Layer %> |
+<%= link_to 'New Point', new_project_point_path(@project) if can? :create, Point %>
 <br />
-<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Edit', edit_project_path(@project) if can? :update, @project %>
+<%= link_to 'Destroy', @project, :method => :delete if can? :destroy, @project %>
 <%= link_to 'Back', projects_path %>

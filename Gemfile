@@ -13,3 +13,4 @@ gem 'formtastic', '~> 1.1.0'
 gem 'jquery-rails'
 
 gem 'devise'
+gem 'cancan'

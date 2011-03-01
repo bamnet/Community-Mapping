@@ -14,6 +14,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.xml
   def show
     @project = Project.find(params[:id])
+    authorize! :read, @project
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +26,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @project = Project.new
+    authorize! :create, Project
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,12 +37,15 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
+    authorize! :edit, @project
   end
 
   # POST /projects
   # POST /projects.xml
   def create
     @project = Project.new(params[:project])
+    @project.users << current_user
+    authorize! :create, @project
 
     respond_to do |format|
       if @project.save
@@ -57,6 +62,7 @@ class ProjectsController < ApplicationController
   # PUT /projects/1.xml
   def update
     @project = Project.find(params[:id])
+    authorize! :edit, @project
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
@@ -73,6 +79,7 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1.xml
   def destroy
     @project = Project.find(params[:id])
+    authorize! :delete, @project
     @project.destroy
 
     respond_to do |format|
