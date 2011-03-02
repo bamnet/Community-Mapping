@@ -15,5 +15,10 @@ class Ability
     can [:read, :update, :destroy], Project do |project|
       project.users.include?(user)
     end
+
+    can :read, Layer, :project => {:is_public => true}
+    can :manage, Layer do |layer|
+      layer.project.users.include?(user)
+    end
   end
 end

@@ -1,15 +1,10 @@
 class LayersController < ApplicationController
-  before_filter :get_project
-
-  def get_project
-    @project = Project.find(params[:project_id])
-  end
+  load_and_authorize_resource :project
+  load_and_authorize_resource
 
   # GET /layers/1
   # GET /layers/1.xml
   def show
-    @layer = Layer.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @layer }
@@ -19,8 +14,6 @@ class LayersController < ApplicationController
   # GET /layers/new
   # GET /layers/new.xml
   def new
-    @layer = Layer.new(:project => @project)
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @layer }
@@ -29,13 +22,11 @@ class LayersController < ApplicationController
 
   # GET /layers/1/edit
   def edit
-    @layer = Layer.find(params[:id])
   end
 
   # POST /layers
   # POST /layers.xml
   def create
-    @layer = Layer.new(params[:layer])
     @layer.project = @project    
 
     respond_to do |format|
@@ -52,8 +43,6 @@ class LayersController < ApplicationController
   # PUT /layers/1
   # PUT /layers/1.xml
   def update
-    @layer = Layer.find(params[:id])
-
     respond_to do |format|
       if @layer.update_attributes(params[:layer])
         format.html { redirect_to([@project, @layer], :notice => 'Layer was successfully updated.') }
@@ -68,7 +57,6 @@ class LayersController < ApplicationController
   # DELETE /layers/1
   # DELETE /layers/1.xml
   def destroy
-    @layer = Layer.find(params[:id])
     @layer.destroy
 
     respond_to do |format|
