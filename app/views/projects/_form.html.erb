@@ -19,6 +19,9 @@ var map; //The map!
     <%= f.input :name, :label => "Project Name" %>
     <%= f.input :is_public, :label => "Public Map", :hint => "Allow non-collaborators to see this map" %>
   <% end %>
+  <%= f.inputs :id => "collaborators" do  %>
+    <%= f.input :users, :as => :check_boxes, :label => 'Editors' %>
+  <% end %>
   <%= f.inputs :id =>"map", :name => "Set default view - drag and zoom the map" do %>
     <%= map_canvas(:style => "width: 100%; height:500px;") %>
     <%= f.input :center_latitude, :as => :hidden %>

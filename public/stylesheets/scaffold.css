@@ -117,6 +117,19 @@ form.formtastic fieldset.buttons {
   border: none;
 }
 
+form.formtastic #collaborators ol li fieldset {
+  height: 100%;
+  border: none;
+  overflow: hidden;
+}
+
+form.formtastic #project_users_input fieldset ol li label {
+  background: none;
+  color: black;
+  text-shadow: 0 1px 0px white;
+  width: 70%;
+}
+
 /* Width plus 3 (html space) *//*\*//*/ form.cmxform legend { display: inline-block; } /* IE Mac legend fix */
 
 .field_with_errors {
