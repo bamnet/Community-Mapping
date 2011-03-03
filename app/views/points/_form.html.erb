@@ -31,7 +31,7 @@ function locate_address(){
   });
 <% end %>
 
-<%= semantic_form_for([@project, @point]) do |f| %>
+<%= semantic_form_for([@project, @layer, @point]) do |f| %>
   <%= f.inputs :id =>"map", :name => "Drag the marker or use auto-locate to find a marker" do %>
     <%= map_canvas(:style => "width: 100%; height:300px;") %>
     <%= f.input :latitude, :as => :hidden %>
@@ -46,7 +46,7 @@ function locate_address(){
     <%= f.input :description, :input_html => {:rows => 5} %>
     <%= f.input :date, :as => :string %>
   <% end %>
-  <% f.buttons do %>
+  <%= f.buttons do %>
     <%= f.commit_button %>
   <% end %>
 <% end %>

@@ -1,15 +1,11 @@
 class PointsController < ApplicationController
-  before_filter :get_project
-
-  def get_project
-    @project = Project.find(params[:project_id])
-  end
+  load_and_authorize_resource :project
+  load_and_authorize_resource :layer, :through => :project
+  load_and_authorize_resource :point, :through => :layer
 
   # GET /points/1
   # GET /points/1.xml
   def show
-    @point = Point.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @point }
@@ -19,9 +15,8 @@ class PointsController < ApplicationController
   # GET /points/new
   # GET /points/new.xml
   def new
-    @point = Point.new(
-                       :latitude => @project.center_latitude,
-                       :longitude => @project.center_longitude)
+    @point.latitude = @project.center_latitude
+    @point.longitude = @project.center_longitude
 
     respond_to do |format|
       format.html # new.html.erb
@@ -31,17 +26,16 @@ class PointsController < ApplicationController
 
   # GET /points/1/edit
   def edit
-    @point = Point.find(params[:id])
   end
 
   # POST /points
   # POST /points.xml
   def create
-    @point = Point.new(params[:point])
+    @point.layer = nil if @point.layer.project != @project
 
     respond_to do |format|
       if @point.save
-        format.html { redirect_to([@project, @point], :notice => 'Point was successfully created.') }
+        format.html { redirect_to([@project, @layer, @point], :notice => 'Point was successfully created.') }
         format.xml  { render :xml => @point, :status => :created, :location => @point }
       else
         format.html { render :action => "new" }
@@ -53,11 +47,10 @@ class PointsController < ApplicationController
   # PUT /points/1
   # PUT /points/1.xml
   def update
-    @point = Point.find(params[:id])
-
     respond_to do |format|
       if @point.update_attributes(params[:point])
-        format.html { redirect_to([@project, @point], :notice => 'Point was successfully updated.') }
+        @point.reload #HACK HACK HACK: I don't know why I need to do this, but the layer doesn't update unless I do
+        format.html { redirect_to([@project, @point.layer, @point], :notice => 'Point was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -69,7 +62,6 @@ class PointsController < ApplicationController
   # DELETE /points/1
   # DELETE /points/1.xml
   def destroy
-    @point = Point.find(params[:id])
     @point.destroy
 
     respond_to do |format|

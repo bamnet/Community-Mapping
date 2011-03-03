@@ -20,5 +20,10 @@ class Ability
     can :manage, Layer do |layer|
       layer.project.users.include?(user)
     end
+
+    can :read, Point, :layer => { :project => {:is_public => true }}
+    can :manage, Point do |point|
+      point.layer.project.users.include?(user)
+    end
   end
 end

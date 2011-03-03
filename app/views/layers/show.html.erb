@@ -18,11 +18,11 @@ var map; //The map!
 
 <ul>
   <% @layer.points.each do |point| %>
-    <li><%= link_to point.name, [@project, point] %></li>
+    <li><%= link_to point.name, [@project, @layer, point] %></li>
   <% end %>
 </ul>
 
-<%= link_to 'New Point', new_project_point_path(@project) if can? :create, @layer.points.build %> 
+<%= link_to 'New Point', new_project_layer_point_path(@project, @layer) if can? :create, @layer.points.build %> 
 <%= link_to 'Edit', edit_project_layer_path(@project, @layer) if can? :update, @layer %> |
 <%= link_to 'Destroy', [@project, @layer], :method => :delete if can? :destroy, @layer %>
 <%= link_to 'Back', project_path(@project) %>

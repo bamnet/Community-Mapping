@@ -32,6 +32,7 @@ var map; //The map!
   <% end %>
 </div>
 <div style="clear: both;">
-  <%= link_to 'Edit', edit_project_point_path(@project, @point) %> |
-  <%= link_to 'Back', project_path(@project) %>
+  <%= link_to 'Edit', edit_project_layer_point_path(@project, @layer, @point) if can? :update, @point %> |
+  <%= link_to 'Destroy', [@project, @layer, @point], :method => :delete if can? :destroy, @point %>
+  <%= link_to 'Back', [@project, @layer] %>
 </div>

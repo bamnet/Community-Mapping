@@ -2,8 +2,9 @@ CommunityMapping::Application.routes.draw do
   devise_for :users
 
   resources :projects do
-    resources :layers, :except => :index
-    resources :points, :except => :index
+    resources :layers, :except => :index do
+      resources :points, :except => :index
+    end
   end
 
   # The priority is based upon order of creation:
