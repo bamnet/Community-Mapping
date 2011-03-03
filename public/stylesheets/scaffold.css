@@ -24,8 +24,10 @@ div.flush { margin-left:-20px; margin-right:-20px; }
 /*##########  LINKS AND LINK BUTTONS  ##########*/
 a { color:#006699; text-decoration: none; }
 a:hover { color:#3399ff; text-decoration: underline; }
-a.link-button { font-size:0.9em; padding:6px 18px; background:#666; color:#FFF; -moz-border-radius:18px; -webkit-border-radius:18px; text-shadow:0 1px 0px #000; -moz-box-shadow: 0 0.2em 0em #999; -webkit-box-shadow: 0 0.2em 0em #999; margin-bottom:25px !important; }
+a.link-button { font-size:0.9em; padding:6px 18px; background:#666; color:#FFF; -moz-border-radius:18px; -webkit-border-radius:18px; text-shadow:0 1px 0px #000; -moz-box-shadow: 0 0.2em 0em #999; -webkit-box-shadow: 0 0.2em 0em #999; margin-bottom:25px !important;}
 a.link-button:hover { background:#006699; -moz-box-shadow: 0 0.2em 0em #99cccc; -webkit-box-shadow: 0 0.2em 0em #99cccc; }
+a.destroy { background:red;}
+a.create {background: #339933; }
 h1 a.link-button, h2 a.link-button { vertical-align:middle; font-size:0.6em; border:solid 1px #008000; width:120px; text-align:center; -moz-border-radius:20px; -webkit-border-radius:20px; -moz-box-shadow: 0 0 0 #666; -webkit-box-shadow: 0 0 0 #666; height:55px; background:#008000; padding:3px 14px; margin-left:12px; }
 h1 a.link-button { font-size:0.4em; }
 h1 a.link-button:hover, h2 a.link-button:hover { background:#339933; -moz-box-shadow: 0 0 0 #666; -webkit-box-shadow: 0 0 0 #666; }

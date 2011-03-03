@@ -65,7 +65,7 @@ class PointsController < ApplicationController
     @point.destroy
 
     respond_to do |format|
-      format.html { redirect_to(project_url) }
+      format.html { redirect_to([@project, @layer]) }
       format.xml  { head :ok }
     end
   end

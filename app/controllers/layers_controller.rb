@@ -58,7 +58,7 @@ class LayersController < ApplicationController
     @layer.destroy
 
     respond_to do |format|
-      format.html { redirect_to(project_layers_url) }
+      format.html { redirect_to(@project) }
       format.xml  { head :ok }
     end
   end

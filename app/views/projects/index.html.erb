@@ -8,14 +8,16 @@
     </ul>
   </div>
 <% end %>
-<div class="main-title">Projects</div>
+<% if can? :create, Project %>
+  <div class="mc-indent" style="padding-bottom: 20px;" ><%= link_to 'New Project', new_project_path, :class=>"link-button create" %></div>
+<% end %>
+<% if !@projects.empty? %>
+<div class="main-title">All Public Projects</div>
 <div class="mc-indent">
   <ul class="big_list">
     <% @projects.each do |project| %>
       <li><%= link_to project.name, project %></li>
     <% end %>
   </ul>
-  <% if can? :create, Project %>
-    <h2><%= link_to 'New Project', new_project_path, :class=>"link-button" %></h2>
-  <% end %>
 </div>
+<% end %>
