@@ -1,6 +1,6 @@
 class LayersController < ApplicationController
   load_and_authorize_resource :project
-  load_and_authorize_resource
+  load_and_authorize_resource :layer, :through => :project
 
   # GET /layers/1
   # GET /layers/1.xml
@@ -27,8 +27,6 @@ class LayersController < ApplicationController
   # POST /layers
   # POST /layers.xml
   def create
-    @layer.project = @project    
-
     respond_to do |format|
       if @layer.save
         format.html { redirect_to([@project, @layer], :notice => 'Layer was successfully created.') }

@@ -5,6 +5,7 @@ class Layer < ActiveRecord::Base
   default_scope order(:name)
 
   validates :name, :presence => true, :uniqueness => true  
+  validates_associated :project
   validate :lock_project, :on => :update
 
   # Toss an error if any tries to update the project_id.
