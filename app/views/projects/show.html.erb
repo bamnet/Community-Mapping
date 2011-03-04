@@ -42,6 +42,6 @@ var map; //The map!
 </div>
 <%= link_to 'New Layer', new_project_layer_path(@project), :class=>"link-button create" if can? :create, @project.layers.build %>
 <br /><br />
-<%= link_to 'Admin', edit_project_path(@project), :class=>"link-button" if can? :update, @project %>
+<%= link_to 'Edit', edit_project_path(@project), :class=>"link-button" if can? :update, @project %>
 <%= link_to 'Delete', @project, :method => :delete, :class=>"link-button destroy" if can? :destroy, @project %>
 <%= link_to 'Back', projects_path, :class=>"link-button" %>
