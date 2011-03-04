@@ -29,6 +29,7 @@ function locate_address(){
   google.maps.event.addListener(marker, "dragend", function(){
     map.setCenter(marker.getPosition());
   });
+  $( "#point_date" ).datepicker();
 <% end %>
 
 <%= semantic_form_for([@project, @layer, @point]) do |f| %>

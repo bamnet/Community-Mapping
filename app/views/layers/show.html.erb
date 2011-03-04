@@ -4,6 +4,10 @@ var map; //The map!
 <% content_for(:js_ready) do %>
   var midpoint = {"point":{"latitude":"<%= @project.center_latitude %>","longitude":"<%= @project.center_longitude %>"}};
   map = setup_map(midpoint, <%= @project.default_zoom %>);
+  var points = <%=raw @layer.points.to_json %>;
+  $.each(points, function(i, point){
+    add_point_to_map(point.point, map);
+  });
 <% end %>
 <h2 class="breadcrumb">
   <%= link_to @project.name, project_path(@project) %>&nbsp;/&nbsp;
@@ -15,12 +19,30 @@ var map; //The map!
 <% if @layer.description.empty? %>
   <p><%= @layer.description %></p>
 <% end %>
-
-<ul>
-  <% @layer.points.each do |point| %>
-    <li><%= link_to point.name, [@project, @layer, point] %></li>
-  <% end %>
-</ul>
+<div class="mc-indent">
+  <table class="datatable">
+    <thead>
+      <tr>
+       <th>Point</th>
+       <th>Address</th>
+       <th>Description</th>
+       <th>Date</th>
+       <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @layer.points.each do |point| %>
+          <tr class="<%= cycle('even', 'odd')%>">
+            <td><%= link_to point.name, [@project, point.layer, point] %></td>
+            <td><%= point.address unless point.address.blank? %></td>
+            <td><%= point.description unless point.description.blank? %></td>
+            <td><%= point.date unless point.date.blank? %></td>
+            <td><%= link_to 'Edit', edit_project_layer_point_path(@project, point.layer, point) if can? :update, point %></td>
+          </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>
 <br />
 <%= link_to 'New Point', new_project_layer_point_path(@project, @layer), :class => 'link-button create' if can? :create, @layer.points.build %> 
 <br /><br />

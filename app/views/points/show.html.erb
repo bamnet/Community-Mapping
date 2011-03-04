@@ -7,7 +7,7 @@ var map; //The map!
   marker = add_point_to_map(point, map, {draggable: true});
 <% end %>
 <h2 class="breadcrumb"> 
-	<%= link_to @project.name, project_path %>&nbsp;/&nbsp;
+	<%= link_to @project.name, @project %>&nbsp;/&nbsp;
 	<%= link_to @point.layer.name, project_layer_path(@project, @point.layer) %>&nbsp;/&nbsp;
 </h2>
 <div class="main-title">
