@@ -14,3 +14,5 @@ gem 'jquery-rails'
 
 gem 'devise'
 gem 'cancan'
+
+gem "paperclip", "~> 2.3"

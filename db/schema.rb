@@ -10,15 +10,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110214235753) do
+ActiveRecord::Schema.define(:version => 20110307192943) do
+
+  create_table "icons", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.string   "image_file_size"
+    t.string   "image_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_public",          :default => true
+  end
 
   create_table "layers", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "color"
     t.integer  "project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "icon_id"
   end
 
   create_table "points", :force => true do |t|

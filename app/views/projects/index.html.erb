@@ -21,3 +21,13 @@
   </ul>
 </div>
 <% end %>
+<% if user_signed_in? %>
+  <div class="main-title">Misc Tools</div>
+  <div class="mc-indent">
+  
+  <% if can? :create, Icon %>
+    <%= link_to 'Browse Icons', icons_path, :class=>'link-button' %>
+    <%= link_to 'New Icon', new_icon_path, :class=>"link-button create" %>
+  <% end %>
+  </div>
+<% end %>

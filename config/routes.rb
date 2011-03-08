@@ -1,4 +1,6 @@
 CommunityMapping::Application.routes.draw do
+  resources :icons, :except => :show
+
   devise_for :users
 
   resources :projects do

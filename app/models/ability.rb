@@ -6,10 +6,12 @@ class Ability
 
     if !user.new_record?
       can :create, Project
+      can :manage, Icon, :user_id => user.id
     end
 
     #Anyone can read a public project
     can :read, Project, :is_public => true
+    can :read, Icon, :is_public => true
 
     #Only owners can manipulate their projects
     can [:read, :update, :destroy], Project do |project|

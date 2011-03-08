@@ -4,7 +4,7 @@ var map; //The map!
 <% content_for(:js_ready) do %>
   var point = {"latitude":"<%= @point.latitude %>","longitude":"<%=@point.longitude%>"};
   map = setup_map({"point": point}, <%= @project.default_zoom + 1 %>);
-  marker = add_point_to_map(point, map, {draggable: true});
+  marker = add_point_to_map(point, map, {draggable: true, icon: '<%= @point.icon %>'});
 <% end %>
 <h2 class="breadcrumb"> 
 	<%= link_to @project.name, @project %>&nbsp;/&nbsp;

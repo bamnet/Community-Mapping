@@ -4,9 +4,9 @@ var map; //The map!
 <% content_for(:js_ready) do %>
   var midpoint = {"point":{"latitude":"<%= @project.center_latitude %>","longitude":"<%= @project.center_longitude %>"}};
   map = setup_map(midpoint, <%= @project.default_zoom %>);
-  var points = <%=raw @project.layers.collect{ |l| l.points }.flatten.to_json %>;
+  var points = <%=raw @project.layers.collect{ |l| l.points }.flatten.to_json(:methods => :icon) %>;
   $.each(points, function(i, point){
-    add_point_to_map(point.point, map);
+    add_point_to_map(point.point, map, {icon: point.point.icon});
   });
 <% end %>
 
