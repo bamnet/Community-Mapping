@@ -16,4 +16,10 @@ class Point < ActiveRecord::Base
     end
   end
 
+  def icon
+    if !layer.icon.nil?
+      layer.icon.image.url(:smaller)
+    end
+  end
+
 end

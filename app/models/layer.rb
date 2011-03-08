@@ -1,6 +1,7 @@
 class Layer < ActiveRecord::Base
   belongs_to :project
-  has_many :points
+  has_many :points, :dependent => :destroy
+  belongs_to :icon
 
   default_scope order(:name)
 
