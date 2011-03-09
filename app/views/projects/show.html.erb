@@ -1,7 +1,18 @@
 <% content_for(:js) do %>
 var map; //The map!
+function update_layer_controls(){
+  var layer_id = $('.js_links #layer').val();
+  $('.js_links #view_layer').attr('href', '<%= project_layer_path(@project, ':id') %>'.replace(':id', layer_id));
+  $('.js_links #add_point').attr('href', '<%= new_project_layer_point_path(@project, ':id') %>'.replace(':id', layer_id));
+}
 <% end %>
 <% content_for(:js_ready) do %>
+  //The view and add selector for layers and points if needed
+  $('.js_links').show();
+  $('.js_links #layer').bind('change', function(){update_layer_controls();});
+  update_layer_controls();
+
+  //Map setup
   var midpoint = {"point":{"latitude":"<%= @project.center_latitude %>","longitude":"<%= @project.center_longitude %>"}};
   map = setup_map(midpoint, <%= @project.default_zoom %>);
   var points = <%=raw @project.layers.collect{ |l| l.points }.flatten.to_json(:methods => :icon) %>;
@@ -40,7 +51,13 @@ var map; //The map!
     </tbody>
   </table>
 </div>
-<%= link_to 'New Layer', new_project_layer_path(@project), :class=>"link-button create" if can? :create, @project.layers.build %>
+<div class="js_links" style="display:none;">
+  <%= select_tag 'layer', options_from_collection_for_select(@project.layers, :id, :name) %>
+  <%= link_to 'View Layer', '#', {:class=>'link-button', :id => "view_layer"} %>
+  <%= link_to 'Add Point', '#', {:class=>'link-button create', :id => 'add_point'} if can? :update, @project %>
+<br /><br />
+</div>
+<%= link_to 'New Layer', new_project_layer_path(@project), :class=>"link-button create" if can? :create, Layer.new(:project => @project) %>
 <br /><br />
 <%= link_to 'Edit', edit_project_path(@project), :class=>"link-button" if can? :update, @project %>
 <%= link_to 'Delete', @project, :method => :delete, :class=>"link-button destroy" if can? :destroy, @project %>
