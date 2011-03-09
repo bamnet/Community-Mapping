@@ -7,16 +7,21 @@ of layers which contains a unique set of points.  All this data can be expored v
 
 == Quick Start
 
-1. At the command prompt, type <tt>rake db:migrate</tt> to initialize the database.
+1. First, bundle everything. At the command prompt, type <tt>bundle install</tt>.
 
-2. Edit /config/enviroments/production.rb (or development if you're in that mode).
+2. Database time.  At the command prompt, type <tt>rake db:migrate</tt> to initialize the empty database.
+
+3. Edit /config/enviroments/production.rb (or development.rb if you're in that mode).
 Change the localhost at the bottom to your hostname.  This will be used when new users
 sign up to confirm there accounts.
-i.e Change localhost in <tt>config.action_mailer.default_url_options = { :host => 'localhost' }</tt> to 'test.com'.
+i.e Change localhost in <tt>config.action_mailer.default_url_options = { :host => 'localhost' }</tt> to test.com.
 
-3. Visit your application in a web browser.
+4. Edit /config/initializers/device.rb and change the config.mailer_sender address
+to something that makes a bit more sense.
 
-4. Click 'Sign Up' in the upper right, wait for the confirmation email, and enjoy!
+5. Visit your application in a web browser.
+
+6. Click 'Sign Up' in the upper right, wait for the confirmation email, and enjoy!
 
 == Legal Stuff
 
