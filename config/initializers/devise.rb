@@ -3,7 +3,7 @@
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in DeviseMailer.
-  config.mailer_sender = "no-reply@senatedev.union.rpi.edu"
+  config.mailer_sender = "no-reply@localhost"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
