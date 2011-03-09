@@ -44,7 +44,7 @@ var map; //The map!
   </table>
 </div>
 <br />
-<%= link_to 'New Point', new_project_layer_point_path(@project, @layer), :class => 'link-button create' if can? :create, @layer.points.build %> 
+<%= link_to 'New Point', new_project_layer_point_path(@project, @layer), :class => 'link-button create' if can? :create, Point.new(:layer => @layer) %> 
 <br /><br />
 <%= link_to 'Edit', edit_project_layer_path(@project, @layer), :class => 'link-button' if can? :update, @layer %>
 <%= link_to 'Destroy', [@project, @layer], :method => :delete, :class => 'link-button destroy' if can? :destroy, @layer %>
