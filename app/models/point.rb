@@ -1,6 +1,8 @@
 class Point < ActiveRecord::Base
   belongs_to :layer
 
+  default_scope order(:name)
+
   validates :name, :presence => true, :uniqueness => true
   validates :longitude, :numericality => true, :inclusion => { :in => -180..180 }
   validates :latitude, :numericality => true, :inclusion => { :in => -90..90}
@@ -16,6 +18,7 @@ class Point < ActiveRecord::Base
     end
   end
 
+  # Find a url to the icon for a point, if one exists.
   def icon
     if !layer.icon.nil?
       layer.icon.image.url(:smaller)
