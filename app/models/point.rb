@@ -4,8 +4,8 @@ class Point < ActiveRecord::Base
   default_scope order(:name)
 
   validates :name, :presence => true, :uniqueness => true
-  validates :longitude, :numericality => true, :inclusion => { :in => -180..180 }
-  validates :latitude, :numericality => true, :inclusion => { :in => -90..90}
+  validates :longitude, :numericality => true#, :inclusion => { :in => -180..180 }
+  validates :latitude, :numericality => true#, :inclusion => { :in => -90..90}
   validates_associated :layer  
 
   validate :lock_project, :on => :update
