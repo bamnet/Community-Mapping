@@ -5,7 +5,9 @@
       <% current_user.projects.each do |project| %>
         <li>
           <%= link_to project.name, project %>
-          <span class="proj_details"><%= truncate(project.description, :length => 120) %></span>
+          <% if !project.description.blank? %>
+            <span class="proj_details"><%= truncate(project.description, :length => 120) %></span>
+          <% end %>
         </li>
       <% end %>
     </ul>
@@ -21,7 +23,9 @@
     <% @projects.each do |project| %>
       <li>
         <%= link_to project.name, project %>
-        <span class="proj_details"><%= truncate(project.description, :length => 120) %></span>
+        <% if !project.description.blank? %>
+          <span class="proj_details"><%= truncate(project.description, :length => 120) %></span>
+        <% end %>
       </li>
     <% end %>
   </ul>

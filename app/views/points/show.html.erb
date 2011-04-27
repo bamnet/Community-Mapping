@@ -15,10 +15,10 @@ var map; //The map!
   <%= map_canvas(:style => "width: 50%; height:200px; float:right;") %>
 </div>
 <div id="info_box">
-  <% if !@point.description.empty? %>
+  <% if !@point.description.blank? %>
     <p><%= @point.description %></p><br />
   <% end %>
-  <% if !@point.address.empty? %>
+  <% if !@point.address.blank? %>
     <p>
       <b>Address:</b>
       <%= @point.address %>
