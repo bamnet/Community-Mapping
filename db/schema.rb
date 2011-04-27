@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110307192943) do
+ActiveRecord::Schema.define(:version => 20110427070221) do
 
   create_table "icons", :force => true do |t|
     t.string   "name"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(:version => 20110307192943) do
     t.boolean  "is_public",        :default => true
     t.decimal  "center_latitude",  :default => 0.0
     t.decimal  "center_longitude", :default => 0.0
-    t.integer  "default_zoom",     :default => 0
+    t.integer  "default_zoom",     :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
