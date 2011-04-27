@@ -16,7 +16,7 @@ var map; //The map!
   <%= @layer.name %>
   <%= map_canvas(:style => "width: 100%; height:500px;") %>
 </div>
-<% if @layer.description.empty? %>
+<% if !@layer.description.empty? %>
   <p><%= @layer.description %></p>
 <% end %>
 <div class="controls">
