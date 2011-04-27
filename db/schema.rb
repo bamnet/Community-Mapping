@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110427070221) do
+ActiveRecord::Schema.define(:version => 20110427070504) do
 
   create_table "icons", :force => true do |t|
     t.string   "name"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20110427070221) do
     t.integer  "default_zoom",     :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "description"
   end
 
   create_table "projects_users", :id => false, :force => true do |t|

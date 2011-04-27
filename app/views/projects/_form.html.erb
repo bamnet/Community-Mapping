@@ -17,6 +17,7 @@ var map; //The map!
 <%= semantic_form_for(@project) do |f| %>
   <%= f.inputs do %>
     <%= f.input :name, :label => "Project Name" %>
+    <%= f.input :description, :input_html => {:rows => 4, :cols => 10} %>
     <%= f.input :is_public, :label => "Public Map", :hint => "Allow non-collaborators to see this map" %>
   <% end %>
   <%= f.inputs :id =>"map", :name => "Set default view - drag and zoom the map" do %>

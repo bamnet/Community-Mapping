@@ -3,7 +3,10 @@
   <div class="mc-indent">
     <ul class="big_list">
       <% current_user.projects.each do |project| %>
-        <li><%= link_to project.name, project %></li>
+        <li>
+          <%= link_to project.name, project %>
+          <span class="proj_details"><%= truncate(project.description, :length => 120) %></span>
+        </li>
       <% end %>
     </ul>
   </div>
@@ -16,7 +19,10 @@
 <div class="mc-indent">
   <ul class="big_list">
     <% @projects.each do |project| %>
-      <li><%= link_to project.name, project %></li>
+      <li>
+        <%= link_to project.name, project %>
+        <span class="proj_details"><%= truncate(project.description, :length => 120) %></span>
+      </li>
     <% end %>
   </ul>
 </div>

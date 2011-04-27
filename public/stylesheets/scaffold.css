@@ -157,6 +157,9 @@ ul.big_list li {
   font-size: 2em;
   padding-bottom: 10px;
 }
+ul.big_list li span{
+  font-size: .5em;
+}
 
 
 table.datatable {-moz-border-radius: 12px 12px 0 0; font-size:0.9em; border: none; border-collapse: collapse; margin-bottom: 20px; width: 96%;}
@@ -181,5 +184,6 @@ table.datatable tr:last-child td:first-child { -moz-border-radius-bottomleft:10p
 table.datatable tr:last-child td:last-child { -moz-border-radius-bottomright:10px; -webkit-border-bottom-right-radius:10px; border-bottom-right-radius:10px; border:solid 1px #999; border-width: 1px 1px 1px 0px; }
 
 .controls{
+  padding-top: 10px;
   padding-bottom: 15px;
 }

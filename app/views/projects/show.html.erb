@@ -25,6 +25,9 @@ function update_layer_controls(){
   <%= @project.name %>
   <%= map_canvas(:style => "width: 100%; height:500px;") %>
 </div>
+<% if !@project.description.empty? %>
+  <p><%= @project.description %></p>
+<% end %>
 <div class="controls">
   <% if !@project.layers.empty? %>
     <div class="js_links" style="display:none;">
