@@ -19,6 +19,14 @@ var map; //The map!
 <% if @layer.description.empty? %>
   <p><%= @layer.description %></p>
 <% end %>
+<div class="controls">
+  <br />
+  <%= link_to 'New Point', new_project_layer_point_path(@project, @layer), :class => 'link-button create' if can? :create, Point.new(:layer => @layer) %>
+  <br /><br />
+  <%= link_to 'Edit', edit_project_layer_path(@project, @layer), :class => 'link-button' if can? :update, @layer %>
+  <%= link_to 'Destroy', [@project, @layer], :method => :delete, :class => 'link-button destroy', :confirm => "Are you sure you want to delete this layer?  All contained points will be removed." if can? :destroy, @layer %>
+  <%= link_to 'Back', project_path(@project), :class => 'link-button' %>
+</div>
 <div class="mc-indent">
   <table class="datatable">
     <thead>
@@ -43,9 +51,3 @@ var map; //The map!
     </tbody>
   </table>
 </div>
-<br />
-<%= link_to 'New Point', new_project_layer_point_path(@project, @layer), :class => 'link-button create' if can? :create, Point.new(:layer => @layer) %> 
-<br /><br />
-<%= link_to 'Edit', edit_project_layer_path(@project, @layer), :class => 'link-button' if can? :update, @layer %>
-<%= link_to 'Destroy', [@project, @layer], :method => :delete, :class => 'link-button destroy' if can? :destroy, @layer %>
-<%= link_to 'Back', project_path(@project), :class => 'link-button' %>

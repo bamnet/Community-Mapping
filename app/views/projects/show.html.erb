@@ -25,6 +25,21 @@ function update_layer_controls(){
   <%= @project.name %>
   <%= map_canvas(:style => "width: 100%; height:500px;") %>
 </div>
+<div class="controls">
+  <% if !@project.layers.empty? %>
+    <div class="js_links" style="display:none;">
+      <%= select_tag 'layer', options_from_collection_for_select(@project.layers, :id, :name) %>
+      <%= link_to 'View Layer', '#', {:class=>'link-button', :id => "view_layer"} %>
+      <%= link_to 'Add Point', '#', {:class=>'link-button create', :id => 'add_point'} if can? :update, @project %>
+    <br /><br />
+    </div>
+  <% end %>
+  <%= link_to 'New Layer', new_project_layer_path(@project), :class=>"link-button create" if can? :create, Layer.new(:project => @project) %>
+  <br /><br /> 
+  <%= link_to 'Edit', edit_project_path(@project), :class=>"link-button" if can? :update, @project %>
+  <%= link_to 'Delete', @project, :method => :delete, :class=>"link-button destroy", :confirm => "Are you sure you want to delete this project? All data will be lost." if can? :destroy, @project %>
+  <%= link_to 'Back', projects_path, :class=>"link-button" %>
+</div>
 <div class="mc-indent">
   <table class="datatable">
     <thead>
@@ -51,14 +66,3 @@ function update_layer_controls(){
     </tbody>
   </table>
 </div>
-<div class="js_links" style="display:none;">
-  <%= select_tag 'layer', options_from_collection_for_select(@project.layers, :id, :name) %>
-  <%= link_to 'View Layer', '#', {:class=>'link-button', :id => "view_layer"} %>
-  <%= link_to 'Add Point', '#', {:class=>'link-button create', :id => 'add_point'} if can? :update, @project %>
-<br /><br />
-</div>
-<%= link_to 'New Layer', new_project_layer_path(@project), :class=>"link-button create" if can? :create, Layer.new(:project => @project) %>
-<br /><br />
-<%= link_to 'Edit', edit_project_path(@project), :class=>"link-button" if can? :update, @project %>
-<%= link_to 'Delete', @project, :method => :delete, :class=>"link-button destroy" if can? :destroy, @project %>
-<%= link_to 'Back', projects_path, :class=>"link-button" %>
